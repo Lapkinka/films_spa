@@ -1,0 +1,4 @@
+export const START = "START",
+    SUCCESS = "SUCCESS",
+    FAIL = "FAIL",
+    LOAD_SEARCH_FILMS = 'LOAD_SEARCH_FILMS'
