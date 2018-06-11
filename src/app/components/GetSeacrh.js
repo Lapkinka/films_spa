@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux"
 import {loadSearchFilms} from "../AC";
+import GetFilmsInSearch from "./GetFilmsInSearch"
 
 class GetSearch extends Component {
     static propTypes = {
@@ -9,10 +10,10 @@ class GetSearch extends Component {
         textSearch:PropTypes.string
     }
     render() {
-        console.log(this.props,this.props)
         return (
-            <div>
+            <div className={"search_container"}>
                 <input onChange={this.getRequest}/>
+                <GetFilmsInSearch filmsArr = {this.props.filmsArr}/>
             </div>
         );
     }
