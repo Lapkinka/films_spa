@@ -12,7 +12,8 @@ class GetSearch extends Component {
     render() {
         return (
             <div className={"search_container"}>
-                <input onChange={this.getRequest}/>
+                <input value={this.props.textSearch}
+                       onChange={this.getRequest}/>
                 <GetFilmsInSearch filmsArr = {this.props.filmsArr}/>
             </div>
         );

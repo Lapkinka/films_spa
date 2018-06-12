@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import GetSearch from "./app/components/GetSeacrh"
+import {BrowserRouter as Router} from "react-router-dom"
 import logo from './logo.svg';
 import './App.css';
+import Films from "./app/routes";
 
 class App extends Component {
   render() {
@@ -11,8 +12,11 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-          <h1>Work</h1>
-          <GetSearch />
+        <Router>
+            <div>
+                <Films/>
+            </div>
+        </Router>
       </div>
     );
   }
