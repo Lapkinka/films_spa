@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from "react-redux"
 import {loadFilmInfo} from "../AC"
 import filmInfo from "../reducers/filmInfo";
+import ChangeStars from './ChangeStars'
 
 class FilmPage extends Component {
     static propTypes ={
@@ -36,6 +37,7 @@ class FilmPage extends Component {
                     <div>Type:{info.Type}</div>
                     <div>Released:{info.Released}</div>
                     <div>Runtime:{info.Runtime}</div>
+                    <ChangeStars/>
                 </div>
                 <div className={"text"}>
                     <div>{info.Plot}</div>

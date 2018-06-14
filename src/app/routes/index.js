@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Route,NavLink} from "react-router-dom"
+import {Route} from "react-router-dom"
 import FilmPage from "../components/FilmPage"
 import GetSearch from "../components/GetSeacrh"
 
@@ -9,7 +9,6 @@ class Films extends Component {
         return (
             <div>
                 <GetSearch/>
-                <NavLink to = "">Search</NavLink>
                 <Route path = "/:id" render = {this.getFilmPage}/>
             </div>
         );
