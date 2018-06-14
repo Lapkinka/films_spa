@@ -14,10 +14,13 @@ class GetSearch extends Component {
     render() {
         return (
             <div className={"search_container"}>
-                <NavLink to = "" onClick={this.clear}>Clear:</NavLink>
-                <input value = {this.props.textSearch}
-                       onChange={this.getRequest}/>
+              <NavLink to = "" onClick={this.clear}>Clear:</NavLink>
+              <input value = {this.props.textSearch}
+                     onChange={this.getRequest}/>
+              <NavLink to="/area">PersonalArea</NavLink>
+              <div>
                 <GetFilmsInSearch filmsArr = {this.props.filmsArr}/>
+              </div>
             </div>
         );
     }
