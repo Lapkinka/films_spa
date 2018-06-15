@@ -1,17 +1,23 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {connect} from "react-redux"
+import {changeStarsAction} from "../AC"
 
 class ChangeStars extends Component {
   static propTypes = {
+    id:PropTypes.string,
+    rating:PropTypes.string
   }
   render() {
-
+    const{rating} = this.props
     return(
       <div className = "starsRating">
-        {Array.from({length:10},(undef,i) => <div key={i+1} datatype={i+1} className = "star"
-                                                 onMouseEnter={this.enter}
-                                                 onMouseLeave={this.leave}
-                                                 onClick={this.setRating}/>)}
+        {Array.from({length:10},(undef,i) => <div key={i+1} datatype={i+1}
+                                                  className = {rating !== undefined
+                                                  && Number(rating) >= i+1 ? "star selected" : "star"}
+                                                  onMouseEnter={this.enter}
+                                                  onMouseLeave={this.leave}
+                                                  onClick={this.setRating.bind(this)}/>)}
       </div>
     )
   }
@@ -30,11 +36,15 @@ class ChangeStars extends Component {
   }
   setRating = function (ev) {
     const {target} = ev,
+      {changeStarsAction,id} = this.props,
       stars = target.parentElement.querySelectorAll("div > .star"),
       rating = target.getAttribute("datatype")
 
     stars.forEach(elem => elem.classList.remove("selected"))
     stars.forEach(elem => Number(elem.getAttribute("datatype")) <= Number(rating) ? elem.classList.add("selected") : null)
+    changeStarsAction(rating,id)
   }
 }
-export default ChangeStars;
+
+// export default ChangeStars;
+export default connect(({searchReducer},ownProps) => ({rating:searchReducer.ids.get(ownProps.id).rating}),{changeStarsAction})(ChangeStars);

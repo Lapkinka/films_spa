@@ -8,8 +8,8 @@ class PersonalArea extends Component {
   render() {
     return(
       <div className = "PersonalArea">
-        <div className = "want_see" >Want see</div>
-        <div className = "looked" >Looked</div>
+        <div className = "want_see" >Want see:</div>
+        <div className = "looked" >Looked:</div>
       </div>
     )
   }

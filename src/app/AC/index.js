@@ -1,4 +1,4 @@
-import {START,SUCCESS,FAIL,LOAD_SEARCH_FILMS,LOAD_FILM_INFO} from "../../constants"
+import {START,SUCCESS,FAIL,LOAD_SEARCH_FILMS,LOAD_FILM_INFO,CHANGE_STARS,CHANGE_FAVORITES} from "../../constants"
 
 export function loadSearchFilms(film) {
     return (dispatch) =>{
@@ -16,7 +16,6 @@ export function loadSearchFilms(film) {
                 type:LOAD_SEARCH_FILMS + FAIL,
                 payload:{film,err}
             }))
-
     }
 }
 
@@ -36,5 +35,23 @@ export function loadFilmInfo(id) {
                 type:LOAD_FILM_INFO + FAIL,
                 payload:{ id,err }
             }))
+    }
+}
+
+export function changeStarsAction(rating,id) {
+    return (dispatch) =>{
+        dispatch({
+            type:CHANGE_STARS,
+            payload: { rating,id }
+        })
+    }
+}
+
+export function changeFavorites(addFilm,id) {
+    return (dispatch) =>{
+        dispatch({
+            type:CHANGE_FAVORITES,
+            payload: { addFilm,id }
+        })
     }
 }
