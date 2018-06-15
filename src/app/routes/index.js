@@ -11,8 +11,8 @@ class Films extends Component {
             <div>
                 <GetSearch/>
                 <Switch>
-                  <Route path = "/:id" render = {this.getFilmPage}/>
                   <Route path = "/area" component = {PersonalArea}/>
+                  <Route path = "/:id" render = {this.getFilmPage}/>
                 </Switch>
             </div>
         );

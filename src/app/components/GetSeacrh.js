@@ -12,14 +12,15 @@ class GetSearch extends Component {
     }
 
     render() {
+      const {filmsArr,textSearch} = this.props
         return (
             <div className={"search_container"}>
               <NavLink to = "" onClick={this.clear}>Clear:</NavLink>
-              <input value = {this.props.textSearch}
+              <input value = {textSearch}
                      onChange={this.getRequest}/>
               <NavLink to="/area">PersonalArea</NavLink>
               <div>
-                <GetFilmsInSearch filmsArr = {this.props.filmsArr}/>
+                <GetFilmsInSearch filmsArr = {filmsArr}/>
               </div>
             </div>
         );
@@ -31,6 +32,6 @@ class GetSearch extends Component {
     clear = () => this.props.loadSearchFilms("")
 }
 export default connect(({searchReducer}) =>({
-    filmsArr:searchReducer.filmsArr,
+    filmsArr:searchReducer.search.get(searchReducer.textSearch),
     textSearch:searchReducer.textSearch
 }),{loadSearchFilms})(GetSearch);

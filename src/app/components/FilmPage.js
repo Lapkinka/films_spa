@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux"
 import {loadFilmInfo} from "../AC"
-import filmInfo from "../reducers/filmInfo";
 import ChangeStars from './ChangeStars'
+import AddFavorites from './AddFavorites'
 
 class FilmPage extends Component {
     static propTypes ={
@@ -17,7 +17,7 @@ class FilmPage extends Component {
     }
     componentWillUpdate(nextProps,nextState){
         const {id,info,loadFilmInfo} = nextProps
-        if(info === undefined) loadFilmInfo(id)
+        if(info === undefined || Object.keys(info).length < 6) loadFilmInfo(id)
     }
 
     render() {
@@ -26,7 +26,8 @@ class FilmPage extends Component {
         return (
             <div className={"filmInfo"}>
                 <div className={"poster"}>
-                    <img src={info.Poster}/>
+                    <div><img className = {info.Poster === "N/A" ? "minContainer" : ""} src={info.Poster}/></div>
+                    <AddFavorites/>
                 </div>
                 <div className={"description"}>
                     <div>Title:{info.Title}</div>
@@ -47,6 +48,6 @@ class FilmPage extends Component {
     }
 }
 
-export default connect((state,ownProps) => ({info:state.filmInfo[ownProps.id]}),{loadFilmInfo})(FilmPage)
+export default connect(({searchReducer},ownProps) => ({info:searchReducer.ids.get(ownProps.id)}),{loadFilmInfo})(FilmPage)
 
 
