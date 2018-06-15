@@ -1,30 +1,31 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux"
+import {changeFavorites} from "../AC"
 
 class AddFavorites extends Component {
   static propTypes ={
-
-  }
-  state = {
-    add:false
+    addFilm:PropTypes.bool,
+    id:PropTypes.string
   }
   render() {
-    return <div><div className = "text_in_favor">add/remove favorites:</div><div className = {`favorite ${this.state.add ? "action" : ""}`} onClick={this.toggle}> </div></div>
+    const {addFilm} = this.props
+    return <div><div className = "text_in_favor">add/remove favorites:</div><div className = {`favorite ${addFilm ? "action" : ""}`} onClick={this.toggle}> </div></div>
   }
   toggle = (ev) =>{
-    const {target} = ev,{add} = this.state
-    if(add){
-      this.state.add = !this.state.add
+    const {target} = ev,{addFilm,changeFavorites,id} = this.props
+    if(addFilm){
       target.classList.remove("action")
+      changeFavorites(!addFilm,id)
     }
     else{
-      this.state.add = !this.state.add
       target.classList.add("action")
+      changeFavorites(!addFilm,id)
     }
   }
 }
 
-export default AddFavorites
+// export default AddFavorites
+export default connect(({searchReducer},ownProps) => ({addFilm:searchReducer.ids.get(ownProps.id).addFilm}),{changeFavorites})(AddFavorites)
 
 

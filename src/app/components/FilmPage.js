@@ -17,17 +17,18 @@ class FilmPage extends Component {
     }
     componentWillUpdate(nextProps,nextState){
         const {id,info,loadFilmInfo} = nextProps
-        if(info === undefined || Object.keys(info).length < 6) loadFilmInfo(id)
+        if(info._map.size < 6) loadFilmInfo(id)
     }
 
     render() {
-        const {info} = this.props
+        const {info,id} = this.props
+      console.log(info,info)
         if(!info) return null
         return (
             <div className={"filmInfo"}>
                 <div className={"poster"}>
                     <div><img className = {info.Poster === "N/A" ? "minContainer" : ""} src={info.Poster}/></div>
-                    <AddFavorites/>
+                    <AddFavorites id = {id}/>
                 </div>
                 <div className={"description"}>
                     <div>Title:{info.Title}</div>
@@ -38,7 +39,7 @@ class FilmPage extends Component {
                     <div>Type:{info.Type}</div>
                     <div>Released:{info.Released}</div>
                     <div>Runtime:{info.Runtime}</div>
-                    <ChangeStars/>
+                    <ChangeStars id = {id}/>
                 </div>
                 <div className={"text"}>
                     <div>{info.Plot}</div>
