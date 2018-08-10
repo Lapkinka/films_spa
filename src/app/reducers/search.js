@@ -3,6 +3,8 @@ import {Record, OrderedMap} from 'immutable'
 
 const FilmRecord = Record({
   Awards:undefined,
+  Actors:undefined,
+  Runtime:undefined,
   BoxOffice:undefined,
   Country:undefined,
   DVD:undefined,
@@ -47,12 +49,9 @@ export default (stateFilms = new ReducerState(),action) => {
           return stateFilms
         }
         case LOAD_FILM_INFO + SUCCESS : {
-          return stateFilms
-            .setIn(['ids',payload.id],new FilmRecord(payload.res))
-            .setIn(['ids',payload.id,"fullLoaded"],true)
+          return stateFilms.setIn(['ids',payload.id],new FilmRecord(payload.res),['ids',payload.id,"fullLoaded"],true)
         }
         case CHANGE_STARS : {
-          console.log("---",stateFilms.ids.get(payload.id).rating)
           return stateFilms.setIn(['ids',payload.id,"rating"],payload.rating)
         }
         case CHANGE_FAVORITES : {
