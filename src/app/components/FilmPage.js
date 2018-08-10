@@ -4,6 +4,8 @@ import {connect} from "react-redux"
 import {loadFilmInfo} from "../AC"
 import ChangeStars from './ChangeStars'
 import AddFavorites from './AddFavorites'
+import InlineSVG from 'svg-inline-react';
+import {svgSource} from '../helpers/helpers'
 
 class FilmPage extends Component {
     static propTypes ={
@@ -26,7 +28,7 @@ class FilmPage extends Component {
 
     render() {
         const {info,id} = this.props
-        if(!info) return null
+        if(!info) return <InlineSVG src={svgSource} />
         return (
             <div className={"filmInfo"}>
                 <div className={"poster"}>

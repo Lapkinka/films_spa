@@ -63,3 +63,8 @@ img{
 .text_in_favor{
     float: left;
 }
+
+#dc-spinner{
+    width: 200px;
+    height: 200px;
+}
