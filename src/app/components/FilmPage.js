@@ -11,9 +11,14 @@ class FilmPage extends Component {
         loadFilmInfo:PropTypes.func,
         info:PropTypes.object
     }
-    componentWillMount(){
+    componentDidMount(){
+        console.log("componentDidMount")
         this.props.loadFilmInfo(this.props.id)
     }
+    // componentWillMount(){
+    //     console.log("componentWillMount")
+    //     this.props.loadFilmInfo(this.props.id)
+    // }
     componentWillUpdate(nextProps,nextState){
       const {id,info,loadFilmInfo} = nextProps
       if(!info ) loadFilmInfo(id)
@@ -21,7 +26,6 @@ class FilmPage extends Component {
 
     render() {
         const {info,id} = this.props
-        console.log(info,info)
         if(!info) return null
         return (
             <div className={"filmInfo"}>
