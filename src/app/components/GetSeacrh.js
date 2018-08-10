@@ -27,6 +27,7 @@ class GetSearch extends Component {
     }
     getRequest = ev =>{
         const {value} = ev.target;
+        console.log()
         this.props.loadSearchFilms(value)
     };
     clear = () => this.props.loadSearchFilms("")

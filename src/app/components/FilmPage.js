@@ -12,17 +12,16 @@ class FilmPage extends Component {
         info:PropTypes.object
     }
     componentWillMount(){
-        const {id,loadFilmInfo} = this.props
-        loadFilmInfo(id)
+        this.props.loadFilmInfo(this.props.id)
     }
     componentWillUpdate(nextProps,nextState){
-        const {id,info,loadFilmInfo} = nextProps
-        if(info._map.size < 6) loadFilmInfo(id)
+      const {id,info,loadFilmInfo} = nextProps
+      if(!info ) loadFilmInfo(id)
     }
 
     render() {
         const {info,id} = this.props
-      console.log(info,info)
+        console.log(info,info)
         if(!info) return null
         return (
             <div className={"filmInfo"}>

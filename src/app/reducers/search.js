@@ -41,19 +41,18 @@ export default (stateFilms = new ReducerState(),action) => {
             return stateFilms.set('textSearch',payload.film)
         }
         case LOAD_SEARCH_FILMS + SUCCESS : {
-          payload.res.Search.forEach(elem =>{
-            stateFilms = stateFilms.setIn(['ids',elem.imdbID],new FilmRecord(elem))
-          })
-          stateFilms = stateFilms.setIn(['search',payload.film],payload.res.Search)
-          return stateFilms
+          return stateFilms.setIn(['search',payload.film],payload.res.Search)
         }
         case LOAD_FILM_INFO + START : {
           return stateFilms
         }
         case LOAD_FILM_INFO + SUCCESS : {
-          return stateFilms.setIn(['ids',payload.id],new FilmRecord(payload.res))
+          return stateFilms
+            .setIn(['ids',payload.id],new FilmRecord(payload.res))
+            .setIn(['ids',payload.id,"fullLoaded"],true)
         }
         case CHANGE_STARS : {
+          console.log("---",stateFilms.ids.get(payload.id).rating)
           return stateFilms.setIn(['ids',payload.id,"rating"],payload.rating)
         }
         case CHANGE_FAVORITES : {
