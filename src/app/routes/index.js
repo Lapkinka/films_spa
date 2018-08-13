@@ -26,7 +26,6 @@ class Films extends Component {
           </div>
         }
         else return <FilmPage id = {id}/>
-
     }
 }
 
