@@ -1,5 +1,5 @@
 import { START, SUCCESS, LOAD_SEARCH_FILMS, LOAD_FILM_INFO, CHANGE_STARS, CHANGE_FAVORITES} from '../../constants'
-import {Record, OrderedMap} from 'immutable'
+import {Record, OrderedMap, List} from 'immutable'
 
 const FilmRecord = Record({
   Awards:undefined,
@@ -33,6 +33,8 @@ const FilmRecord = Record({
 const ReducerState = new Record({
     search:new OrderedMap({}),
     ids:new OrderedMap({}),
+    favoritesIds : new List(),
+    addIds : new List(),
     textSearch:''
 })
 
@@ -52,10 +54,20 @@ export default (stateFilms = new ReducerState(),action) => {
           return stateFilms.setIn(['ids',payload.id],new FilmRecord(payload.res),['ids',payload.id,"fullLoaded"],true)
         }
         case CHANGE_STARS : {
-          return stateFilms.setIn(['ids',payload.id,"rating"],payload.rating)
+          const {favoritesIds} = stateFilms
+          stateFilms = stateFilms.setIn(['ids',payload.id,"rating"],payload.rating)
+          stateFilms = favoritesIds.includes(payload.id) ?
+            payload.rating === undefined ? stateFilms.set("favoritesIds",favoritesIds.filter(elem => elem !== payload.id)) :
+              stateFilms : stateFilms.set("favoritesIds",favoritesIds.push(payload.id))
+          return stateFilms
         }
         case CHANGE_FAVORITES : {
-          return stateFilms.setIn(['ids',payload.id,"addFilm"],payload.addFilm)
+          const {addIds} = stateFilms
+          stateFilms = stateFilms.setIn(['ids',payload.id,"addFilm"],payload.addFilm, ['ids',payload.id,"rating"],payload.rating)
+          stateFilms = addIds.includes(payload.id) ?
+            payload.rating === undefined ? stateFilms.set("addIds",addIds.filter(elem => elem !== payload.id)) :
+              stateFilms : stateFilms.set("addIds",addIds.push(payload.id))
+          return stateFilms
         }
     }
     return stateFilms
