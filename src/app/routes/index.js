@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {Route,Switch} from "react-router-dom"
 import FilmPage from "../components/FilmPage"
 import GetSearch from "../components/GetSeacrh"
@@ -11,6 +10,7 @@ class Films extends Component {
             <div>
                 <GetSearch/>
                 <Switch>
+                  <Route path = "/area/:id" render = {this.getFilmPage}/>
                   <Route path = "/area" component = {PersonalArea}/>
                   <Route path = "/:id" render = {this.getFilmPage}/>
                 </Switch>
@@ -18,8 +18,15 @@ class Films extends Component {
         );
     }
     getFilmPage = ({match}) =>{
-        const {id} = match.params
-        return <FilmPage id = {id}/>
+        const {path,params:{id}} = match
+        if(path === "/area/:id"){
+          return <div>
+            <PersonalArea/>
+            <FilmPage id = {id}/>
+          </div>
+        }
+        else return <FilmPage id = {id}/>
+
     }
 }
 

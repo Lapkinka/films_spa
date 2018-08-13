@@ -10,7 +10,6 @@ class GetFilmsInSearch extends Component {
         const {filmsArr} = this.props,
             TYPES = ['movie','series'],
             result = {}
-            console.log("filmsArr",filmsArr)
         if(!filmsArr) return null
         TYPES.forEach(type =>{
             result[type] = filmsArr.filter(elem => elem.Type === type).map((elem,i) => {

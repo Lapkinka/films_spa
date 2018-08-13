@@ -11,13 +11,20 @@ class ChangeStars extends Component {
   render() {
     const{rating} = this.props
     return(
-      <div className = "starsRating">
-        {Array.from({length:10},(undef,i) => <div key={i+1} datatype={i+1}
-                                                  className = {rating !== undefined
-                                                  && Number(rating) >= i+1 ? "star selected" : "star"}
-                                                  onMouseEnter={this.enter}
-                                                  onMouseLeave={this.leave}
-                                                  onClick={this.setRating.bind(this)}/>)}
+      <div>
+        <div className = "starsRating">
+          {Array.from({length:10},(undef,i) => <div key={i+1} datatype={i+1}
+                                                    className = {rating !== undefined
+                                                    && Number(rating) >= i+1 ? "star selected" : "star"}
+                                                    onMouseEnter={this.enter}
+                                                    onMouseLeave={this.leave}
+                                                    onClick={this.setRating.bind(this)}/>)}
+        </div>
+        {rating !== undefined ?
+          <div className = "deleteRating" datatype = "delete" onClick={this.setRating.bind(this)}>
+            delete rating
+          </div>
+          : null}
       </div>
     )
   }
@@ -39,10 +46,12 @@ class ChangeStars extends Component {
       {changeStarsAction,id} = this.props,
       stars = target.parentElement.querySelectorAll("div > .star"),
       rating = target.getAttribute("datatype")
-
-    stars.forEach(elem => elem.classList.remove("selected"))
-    stars.forEach(elem => Number(elem.getAttribute("datatype")) <= Number(rating) ? elem.classList.add("selected") : null)
-    changeStarsAction(rating,id)
+      if(rating === "delete") changeStarsAction(undefined,id)
+      else{
+      stars.forEach(elem => elem.classList.remove("selected"))
+        stars.forEach(elem => Number(elem.getAttribute("datatype")) <= Number(rating) ? elem.classList.add("selected") : null)
+        changeStarsAction(rating,id)
+      }
   }
 }
 

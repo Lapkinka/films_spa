@@ -14,13 +14,9 @@ class FilmPage extends Component {
         info:PropTypes.object
     }
     componentDidMount(){
-        console.log("componentDidMount")
-        this.props.loadFilmInfo(this.props.id)
+      const{info,loadFilmInfo,id} = this.props
+      if(!info ) loadFilmInfo(id)
     }
-    // componentWillMount(){
-    //     console.log("componentWillMount")
-    //     this.props.loadFilmInfo(this.props.id)
-    // }
     componentWillUpdate(nextProps,nextState){
       const {id,info,loadFilmInfo} = nextProps
       if(!info ) loadFilmInfo(id)
