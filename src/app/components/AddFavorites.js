@@ -6,7 +6,8 @@ import {changeFavorites} from "../AC"
 class AddFavorites extends Component {
   static propTypes ={
     addFilm:PropTypes.bool,
-    id:PropTypes.string
+    id:PropTypes.string,
+    changeFavorites:PropTypes.func
   }
   render() {
     const {addFilm} = this.props

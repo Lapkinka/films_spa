@@ -7,8 +7,9 @@ import GetFilmsInSearch from "./GetFilmsInSearch"
 
 class GetSearch extends Component {
     static propTypes = {
-        filmsArr:PropTypes.array,
-        textSearch:PropTypes.string
+      filmsArr:PropTypes.array,
+      textSearch:PropTypes.string,
+      loadSearchFilms:PropTypes.func
     }
 
     render() {

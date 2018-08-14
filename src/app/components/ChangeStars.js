@@ -6,7 +6,8 @@ import {changeStarsAction} from "../AC"
 class ChangeStars extends Component {
   static propTypes = {
     id:PropTypes.string,
-    rating:PropTypes.string
+    rating:PropTypes.string,
+    changeStarsAction:PropTypes.func
   }
   render() {
     const{rating} = this.props
