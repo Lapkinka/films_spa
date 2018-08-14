@@ -16,10 +16,10 @@ class GetSearch extends Component {
       const {filmsArr,textSearch} = this.props
         return (
             <div className={"search_container"}>
-              <NavLink to = "" onClick={this.clear}>Clear:</NavLink>
+              <NavLink to = "/search" onClick={this.clear}>Clear:</NavLink>
               <input value = {textSearch}
                      onChange={this.getRequest}/>
-              <NavLink to="/area">PersonalArea</NavLink>
+              <NavLink to="/search/area">PersonalArea</NavLink>
               <div>
                 <GetFilmsInSearch filmsArr = {filmsArr}/>
               </div>

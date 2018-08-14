@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Route,Switch} from "react-router-dom"
+import {Route,Switch,Redirect} from "react-router-dom"
 import FilmPage from "../components/FilmPage"
 import GetSearch from "../components/GetSeacrh"
 import PersonalArea from '../components/PersonalArea'
@@ -10,16 +10,17 @@ class Films extends Component {
             <div>
                 <GetSearch/>
                 <Switch>
-                  <Route path = "/area/:id" render = {this.getFilmPage}/>
-                  <Route path = "/area" component = {PersonalArea}/>
-                  <Route path = "/:id" render = {this.getFilmPage}/>
+                  <Route path = "/search/area/:id" render = {this.getFilmPage}/>
+                  <Route path = "/search/area" component = {PersonalArea}/>
+                  <Route path = "/search/:id" render = {this.getFilmPage}/>
+                  <Route path = "*" render = {this.redirect}/>
                 </Switch>
             </div>
         );
     }
     getFilmPage = ({match}) =>{
         const {path,params:{id}} = match
-        if(path === "/area/:id"){
+        if(path === "/search/area/:id"){
           return <div>
             <PersonalArea/>
             <FilmPage id = {id}/>
@@ -27,6 +28,7 @@ class Films extends Component {
         }
         else return <FilmPage id = {id}/>
     }
+    redirect = ({match}) => match.isExact ? <Redirect to = "/search"/> : null
 }
 
 export default Films;

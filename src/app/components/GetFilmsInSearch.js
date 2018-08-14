@@ -16,9 +16,9 @@ class GetFilmsInSearch extends Component {
                 return !i ?
                     <div key={type + i}>
                         <div className={'type_elem'}>{type === TYPES[0] ? "movies" : type}</div>
-                        <div><NavLink to = {`/${elem.imdbID}`} activeStyle = {{color:"red"}}>{`${elem.Title} ${elem.Year}`}</NavLink></div>
+                        <div><NavLink to = {`/search/${elem.imdbID}`} activeStyle = {{color:"red"}}>{`${elem.Title} ${elem.Year}`}</NavLink></div>
                     </div> :
-                    <div key={type + i}><NavLink to = {`/${elem.imdbID}`} activeStyle = {{color:"red"}}>{`${elem.Title} ${elem.Year}`}</NavLink></div>
+                    <div key={type + i}><NavLink to = {`/search/${elem.imdbID}`} activeStyle = {{color:"red"}}>{`${elem.Title} ${elem.Year}`}</NavLink></div>
             })
         })
         return(

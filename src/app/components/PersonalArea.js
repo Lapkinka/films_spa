@@ -17,12 +17,12 @@ class PersonalArea extends Component {
       titlesFavorites = []
     addIds.forEach((elem,i) => titlesAdd.push(
         <li key={`add_${i}`}>
-          <NavLink to = {`/area/${elem}`} activeStyle = {{color:"red"}}>{info.get(elem).Title}</NavLink>
+          <NavLink to = {`/search/area/${elem}`} activeStyle = {{color:"red"}}>{info.get(elem).Title}</NavLink>
         </li>))
 
     favoritesIds.forEach((elem,i) => titlesFavorites.push(
       <li key={`favorite_${i}`}>
-        <NavLink to = {`/area/${elem}`} activeStyle = {{color:"red"}}>{info.get(elem).Title}</NavLink>
+        <NavLink to = {`/search/area/${elem}`} activeStyle = {{color:"red"}}>{info.get(elem).Title}</NavLink>
       </li>))
     return(
       <div className = "PersonalArea">
