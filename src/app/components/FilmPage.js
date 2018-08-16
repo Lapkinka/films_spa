@@ -14,42 +14,42 @@ class FilmPage extends Component {
         info:PropTypes.object
     }
     componentDidMount(){
-      const{info,loadFilmInfo,id} = this.props
-      if(!info ) loadFilmInfo(id)
+      const{info,loadFilmInfo,id} = this.props, thisFilm = info.get(id)
+      if(!thisFilm) loadFilmInfo(id)
     }
     componentWillUpdate(nextProps,nextState){
-      const {id,info,loadFilmInfo} = nextProps
-      if(!info ) loadFilmInfo(id)
+      const {id,info,loadFilmInfo} = nextProps, thisFilm = info.get(id)
+      if(!thisFilm) loadFilmInfo(id)
     }
 
     render() {
-        const {info,id} = this.props
-        if(!info) return <InlineSVG src={svgSource} />
+        const {info,id} = this.props, thisFilm = info.get(id)
+        if(!thisFilm) return <InlineSVG src={svgSource} />
         return (
             <div className={"filmInfo"}>
                 <div className={"poster"}>
-                    <div><img className = {info.Poster === "N/A" ? "minContainer" : ""} src={info.Poster}/></div>
+                    <div><img className = {thisFilm.Poster === "N/A" ? "minContainer" : ""} src={thisFilm.Poster}/></div>
                     <AddFavorites id = {id}/>
                 </div>
                 <div className={"description"}>
-                    <div>Title:{info.Title}</div>
-                    <div>Country:{info.Country}</div>
-                    <div>Actors:{info.Actors}</div>
-                    <div>Genre:{info.Genre}</div>
-                    <div>Awards:{info.Awards}</div>
-                    <div>Type:{info.Type}</div>
-                    <div>Released:{info.Released}</div>
-                    <div>Runtime:{info.Runtime}</div>
+                    <div>Title:{thisFilm.Title}</div>
+                    <div>Country:{thisFilm.Country}</div>
+                    <div>Actors:{thisFilm.Actors}</div>
+                    <div>Genre:{thisFilm.Genre}</div>
+                    <div>Awards:{thisFilm.Awards}</div>
+                    <div>Type:{thisFilm.Type}</div>
+                    <div>Released:{thisFilm.Released}</div>
+                    <div>Runtime:{thisFilm.Runtime}</div>
                     <ChangeStars id = {id}/>
                 </div>
                 <div className={"text"}>
-                    <div>{info.Plot}</div>
+                    <div>{thisFilm.Plot}</div>
                 </div>
             </div>
         );
     }
 }
 
-export default connect(({searchReducer},ownProps) => ({info:searchReducer.ids.get(ownProps.id)}),{loadFilmInfo})(FilmPage)
+export default connect(({searchReducer},ownProps) => ({info:searchReducer.ids}),{loadFilmInfo})(FilmPage)
 
 
