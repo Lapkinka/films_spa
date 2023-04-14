@@ -9,6 +9,7 @@ class App extends Component {
     const text = "1"
     return (
       <div className="App">
+          <span>Добавил mc виджет</span>
         <Router>
             <div>
               <Films/>
